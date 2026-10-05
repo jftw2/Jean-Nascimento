@@ -15,11 +15,21 @@ Abra [http://localhost:3000](http://localhost:3000).
 ## Estrutura
 
 ```
+schema.sql                 # Tabelas + RLS (rodar no Supabase SQL Editor)
+.env.local                 # Supabase URL + anon key (não commitado)
 src/
-  app/           # App Router (layout, page, globals)
-  components/    # Sidebar, Header, KillSwitch, SummaryCard, ApprovalKanban
-  data/mock.ts   # Dados estáticos (cards + kanban)
+  app/                     # App Router
+  components/              # UI
+  data/mock.ts             # Cards + colunas mock do Kanban
+  lib/supabase/client.ts   # Cliente Supabase
+  lib/approvals.ts         # Fetch fila_aprovacoes (Para Revisão)
 ```
+
+## Schema Supabase
+
+1. Abra o projeto no Supabase → **SQL Editor** → New query
+2. Cole o conteúdo de `schema.sql` e execute
+3. Reinicie `npm run dev` se já estiver rodando
 
 ## UI
 

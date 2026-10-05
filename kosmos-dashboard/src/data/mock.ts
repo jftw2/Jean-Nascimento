@@ -42,21 +42,8 @@ export const financialSummaries: FinancialSummary[] = [
   },
 ];
 
+/** Mock for Em Processamento / Concluído only. Para Revisão comes from Supabase. */
 export const approvalItems: ApprovalItem[] = [
-  {
-    id: "apr-1",
-    title: "Campanha Facebook — Upsell",
-    channel: "Tráfego Pago",
-    amount: "R$ 1.200,00",
-    status: "review",
-  },
-  {
-    id: "apr-2",
-    title: "Novo criativo — Canal Dark A",
-    channel: "Canais Dark",
-    amount: "R$ 450,00",
-    status: "review",
-  },
   {
     id: "apr-3",
     title: "Ordem day trade — PETR4",

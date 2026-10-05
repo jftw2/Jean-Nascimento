@@ -3,8 +3,17 @@ import { Header } from "@/components/Header";
 import { Sidebar } from "@/components/Sidebar";
 import { SummaryCard } from "@/components/SummaryCard";
 import { approvalItems, financialSummaries } from "@/data/mock";
+import { fetchPendingApprovals } from "@/lib/approvals";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const pendingApprovals = await fetchPendingApprovals();
+  const mockOtherColumns = approvalItems.filter(
+    (item) => item.status !== "review",
+  );
+  const kanbanItems = [...pendingApprovals, ...mockOtherColumns];
+
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       <Sidebar />
@@ -29,7 +38,7 @@ export default function Home() {
             </div>
           </section>
 
-          <ApprovalKanban items={approvalItems} />
+          <ApprovalKanban items={kanbanItems} />
         </main>
       </div>
     </div>

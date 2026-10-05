@@ -33,6 +33,8 @@ export function ApprovalKanban({ items }: ApprovalKanbanProps) {
           const columnItems = items.filter(
             (item) => item.status === column.status,
           );
+          const isReviewEmpty =
+            column.status === "review" && columnItems.length === 0;
 
           return (
             <div
@@ -49,27 +51,35 @@ export function ApprovalKanban({ items }: ApprovalKanbanProps) {
               </div>
 
               <div className="flex flex-col gap-2">
-                {columnItems.map((item) => (
-                  <article
-                    key={item.id}
-                    className="rounded-md border border-border bg-surface-raised p-3"
-                  >
-                    <div className="flex items-start gap-2">
-                      <span
-                        className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${statusDot[item.status]}`}
-                      />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-foreground">
-                          {item.title}
-                        </p>
-                        <p className="mt-1 text-xs text-muted">{item.channel}</p>
-                        <p className="mt-2 text-sm text-foreground">
-                          {item.amount}
-                        </p>
+                {isReviewEmpty ? (
+                  <p className="rounded-md border border-dashed border-border px-3 py-6 text-center text-sm text-muted">
+                    Nenhuma tarefa pendente dos agentes
+                  </p>
+                ) : (
+                  columnItems.map((item) => (
+                    <article
+                      key={item.id}
+                      className="rounded-md border border-border bg-surface-raised p-3"
+                    >
+                      <div className="flex items-start gap-2">
+                        <span
+                          className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${statusDot[item.status]}`}
+                        />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-medium text-foreground">
+                            {item.title}
+                          </p>
+                          <p className="mt-1 text-xs text-muted">
+                            {item.channel}
+                          </p>
+                          <p className="mt-2 text-sm text-foreground">
+                            {item.amount}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                ))}
+                    </article>
+                  ))
+                )}
               </div>
             </div>
           );
