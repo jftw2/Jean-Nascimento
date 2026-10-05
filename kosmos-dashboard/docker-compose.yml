@@ -1,0 +1,26 @@
+# K.O.S.M.O.S. MVP infra — backend (FastAPI) + n8n
+# Start: docker compose up -d
+# Backend: http://localhost:8000
+# n8n:     http://localhost:5678
+#
+# Secrets: copy backend/.env.example → backend/.env (not committed)
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    restart: unless-stopped
+
+volumes:
+  n8n_data:
